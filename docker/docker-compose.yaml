@@ -682,7 +682,7 @@ services:
       ENABLE_WEBSITE_WATERCRAWL: ${ENABLE_WEBSITE_WATERCRAWL:-true}
   # The postgres database.
   db:
-    image: postgres:15-alpine
+    image: 192.168.229.14/library/postgres:15-alpine
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -705,7 +705,7 @@ services:
 
   # The redis cache.
   redis:
-    image: redis:6-alpine
+    image: 192.168.229.14/library/redis:6-alpine
     restart: always
     environment:
       REDISCLI_AUTH: ${REDIS_PASSWORD:-difyai123456}
@@ -806,7 +806,7 @@ services:
   # for more information, please refer to
   # https://docs.dify.ai/learn-more/faq/install-faq#18-why-is-ssrf-proxy-needed%3F
   ssrf_proxy:
-    image: ubuntu/squid:latest
+    image: 192.168.229.14/library/ubuntu/squid:latest
     restart: always
     volumes:
       - ./ssrf_proxy/squid.conf.template:/etc/squid/squid.conf.template
@@ -826,7 +826,7 @@ services:
   # Certbot service
   # use `docker-compose --profile certbot up` to start the certbot service.
   certbot:
-    image: certbot/certbot
+    image: 192.168.229.14/library/certbot/certbot
     profiles:
       - certbot
     volumes:
@@ -846,7 +846,7 @@ services:
   # The nginx reverse proxy.
   # used for reverse proxying the API service and Web service.
   nginx:
-    image: nginx:latest
+    image: 192.168.229.14/library/nginx:latest
     restart: always
     volumes:
       - ./nginx/nginx.conf.template:/etc/nginx/nginx.conf.template
@@ -885,7 +885,7 @@ services:
 
   # The Weaviate vector store.
   weaviate:
-    image: semitechnologies/weaviate:1.19.0
+    image: 192.168.229.14/library/semitechnologies/weaviate:1.19.0
     profiles:
       - ''
       - weaviate
@@ -954,7 +954,7 @@ services:
 
   # The pgvector vector database.
   pgvector:
-    image: pgvector/pgvector:pg16
+    image: 192.168.229.14/library/pgvector/pgvector:pg16
     profiles:
       - pgvector
     restart: always
@@ -981,7 +981,7 @@ services:
 
   # get image from https://www.vastdata.com.cn/
   vastbase:
-    image: vastdata/vastbase-vector
+    image: 192.168.229.14/library/vastdata/vastbase-vector
     profiles:
       - vastbase
     restart: always
@@ -1005,7 +1005,7 @@ services:
 
   # pgvecto-rs vector store
   pgvecto-rs:
-    image: tensorchord/pgvecto-rs:pg16-v0.3.0
+    image: 192.168.229.14/library/tensorchord/pgvecto-rs:pg16-v0.3.0
     profiles:
       - pgvecto-rs
     restart: always
@@ -1027,7 +1027,7 @@ services:
 
   # Chroma vector database
   chroma:
-    image: ghcr.io/chroma-core/chroma:0.5.20
+    image: 192.168.229.14/library/ghcr.io/chroma-core/chroma:0.5.20
     profiles:
       - chroma
     restart: always
@@ -1040,7 +1040,7 @@ services:
 
   # OceanBase vector database
   oceanbase:
-    image: oceanbase/oceanbase-ce:4.3.5-lts
+    image: 192.168.229.14/library/oceanbase/oceanbase-ce:4.3.5-lts
     container_name: oceanbase
     profiles:
       - oceanbase
@@ -1067,7 +1067,7 @@ services:
 
   # Oracle vector database
   oracle:
-    image: container-registry.oracle.com/database/free:latest
+    image: 192.168.229.14/library/container-registry.oracle.com/database/free:latest
     profiles:
       - oracle
     restart: always
@@ -1083,7 +1083,7 @@ services:
   # Milvus vector database services
   etcd:
     container_name: milvus-etcd
-    image: quay.io/coreos/etcd:v3.5.5
+    image: 192.168.229.14/library/quay.io/coreos/etcd:v3.5.5
     profiles:
       - milvus
     environment:
@@ -1104,7 +1104,7 @@ services:
 
   minio:
     container_name: milvus-minio
-    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+    image: 192.168.229.14/library/minio/minio:RELEASE.2023-03-20T20-16-18Z
     profiles:
       - milvus
     environment:
@@ -1123,7 +1123,7 @@ services:
 
   milvus-standalone:
     container_name: milvus-standalone
-    image: milvusdb/milvus:v2.5.15
+    image: 192.168.229.14/library/milvusdb/milvus:v2.5.15
     profiles:
       - milvus
     command: [ 'milvus', 'run', 'standalone' ]
@@ -1151,7 +1151,7 @@ services:
   # Opensearch vector database
   opensearch:
     container_name: opensearch
-    image: opensearchproject/opensearch:latest
+    image: 192.168.229.14/library/opensearchproject/opensearch:latest
     profiles:
       - opensearch
     environment:
@@ -1173,7 +1173,7 @@ services:
 
   opensearch-dashboards:
     container_name: opensearch-dashboards
-    image: opensearchproject/opensearch-dashboards:latest
+    image: 192.168.229.14/library/opensearchproject/opensearch-dashboards:latest
     profiles:
       - opensearch
     environment:
@@ -1187,7 +1187,7 @@ services:
 
   # opengauss vector database.
   opengauss:
-    image: opengauss/opengauss:7.0.0-RC1
+    image: 192.168.229.14/library/opengauss/opengauss:7.0.0-RC1
     profiles:
       - opengauss
     privileged: true
@@ -1210,7 +1210,7 @@ services:
   # MyScale vector database
   myscale:
     container_name: myscale
-    image: myscale/myscaledb:1.6.4
+    image: 192.168.229.14/library/myscale/myscaledb:1.6.4
     profiles:
       - myscale
     restart: always
@@ -1225,7 +1225,7 @@ services:
   # Matrixone vector store.
   matrixone:
     hostname: matrixone
-    image: matrixorigin/matrixone:2.1.1
+    image: 192.168.229.14/library/matrixorigin/matrixone:2.1.1
     profiles:
       - matrixone
     restart: always
@@ -1237,7 +1237,7 @@ services:
   # https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html
   # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    image: 192.168.229.14/library/docker.elastic.co/elasticsearch/elasticsearch:8.14.3
     container_name: elasticsearch
     profiles:
       - elasticsearch
@@ -1272,7 +1272,7 @@ services:
   # https://www.elastic.co/guide/en/kibana/current/docker.html
   # https://www.elastic.co/guide/en/kibana/current/settings.html
   kibana:
-    image: docker.elastic.co/kibana/kibana:8.14.3
+    image: 192.168.229.14/library/docker.elastic.co/kibana/kibana:8.14.3
     container_name: kibana
     profiles:
       - elasticsearch
@@ -1300,7 +1300,7 @@ services:
   # unstructured .
   # (if used, you need to set ETL_TYPE to Unstructured in the api & worker service.)
   unstructured:
-    image: downloads.unstructured.io/unstructured-io/unstructured-api:latest
+    image: 192.168.229.14/library/downloads.unstructured.io/unstructured-io/unstructured-api:latest
     profiles:
       - unstructured
     restart: always
